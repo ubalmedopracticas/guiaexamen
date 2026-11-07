@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#4d96ff" />
+<meta name="description" content="Guía de examen interactiva 1er trimestre 3°B: estudia con tarjetas, juegos, sonidos y preguntas." />
+<title>Guía de Examen 3°B · ¡A estudiar jugando!</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="flotantes" aria-hidden="true"></div>
+
+<button id="btn-sonido" class="btn-sonido" title="Activar o quitar el sonido" aria-label="Activar o quitar el sonido">🔊</button>
+
+<main id="app">
+
+  <!-- ============ PANTALLA DE INICIO ============ -->
+  <section id="pantalla-inicio" class="pantalla">
+    <h1 id="titulo-principal" class="titulo" aria-label="Guía de Examen"></h1>
+    <p class="subtitulo">1<sup>er</sup> Trimestre · 3°B · ¡Estudia jugando! 🎮</p>
+
+    <div class="mascota-fila">
+      <div class="mascota" id="mascota-inicio">🦉</div>
+      <div class="globo">¡Hola! Soy el <b>Búho Sabio</b> 🤓<br />
+        Elige una materia: puedes <b>📖 estudiar</b> las tarjetas o <b>🎮 jugar</b> a las preguntas.</div>
+    </div>
+
+    <div id="rejilla-materias" class="rejilla-materias"></div>
+
+    <div class="zona-extra">
+      <button id="btn-examen" class="btn-hero btn-examen">🏆 ¡Examen grande! <small>(todas las materias)</small></button>
+      <button id="btn-vf" class="btn-hero btn-vf">⚡ Verdadero o Falso <small>(juego rápido)</small></button>
+    </div>
+
+    <div id="panel-estrellas" class="panel-estrellas"></div>
+
+    <p class="pista">🔊 Sube el volumen: la página hace sonidos y puede leer las tarjetas y preguntas en voz alta.</p>
+    <p class="pie">Hecho con ❤️ para el mejor alumno de 3°B</p>
+  </section>
+
+  <!-- ============ PANTALLA ESTUDIAR (TARJETAS) ============ -->
+  <section id="pantalla-estudiar" class="pantalla oculta">
+    <div class="cabecera-seccion">
+      <button class="btn btn-volver" data-volver="inicio">⬅ Inicio</button>
+      <h2 id="estudio-titulo">📚</h2>
+      <span class="hueco-cabecera"></span>
+    </div>
+
+    <div id="chips-temas" class="chips-temas"></div>
+
+    <div id="tarjeta-flash" class="tarjeta-flash">
+      <div id="tarjeta-emoji" class="tarjeta-emoji" title="¡Tócame!">🤝</div>
+      <p id="tarjeta-texto" class="tarjeta-texto"></p>
+      <button id="btn-escuchar" class="btn btn-azul">🔊 Escuchar</button>
+    </div>
+
+    <div class="nav-tarjeta">
+      <button id="btn-anterior" class="btn btn-blanco">⬅ Anterior</button>
+      <span id="tarjeta-contador" class="contador">1 / 6</span>
+      <button id="btn-siguiente-tarjeta" class="btn btn-blanco">Siguiente ➡</button>
+    </div>
+    <div id="puntos-tarjetas" class="puntos"></div>
+    <p class="pista">💡 Toca la imagen para verla saltar y cambia de tema con las etiquetas de arriba.</p>
+  </section>
+
+  <!-- ============ PANTALLA QUIZ (PREGUNTAS) ============ -->
+  <section id="pantalla-quiz" class="pantalla oculta">
+    <div class="cabecera-seccion">
+      <button class="btn btn-volver" id="btn-salir-quiz">⬅ Salir</button>
+      <h2 id="quiz-titulo">🎮</h2>
+      <div class="marcador">⭐ <span id="quiz-puntos">0</span></div>
+    </div>
+
+    <div class="barra-progreso"><div id="progreso-relleno"></div></div>
+
+    <div class="quiz-caja">
+      <div id="quiz-emoji" class="quiz-emoji">🤝</div>
+      <div class="quiz-pregunta-fila">
+        <p id="quiz-pregunta" class="quiz-pregunta"></p>
+        <button id="btn-leer-pregunta" class="btn-leer" title="Escuchar la pregunta">🔊</button>
+      </div>
+      <div id="quiz-opciones" class="opciones"></div>
+
+      <div id="quiz-feedback" class="feedback oculta">
+        <span id="feedback-cara" class="feedback-cara">🎉</span>
+        <div>
+          <p id="feedback-titulo" class="feedback-titulo"></p>
+          <p id="feedback-texto" class="feedback-texto"></p>
+        </div>
+      </div>
+
+      <button id="btn-siguiente" class="btn btn-verde btn-centrado oculta">Siguiente ➡️</button>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA VERDADERO O FALSO ============ -->
+  <section id="pantalla-vf" class="pantalla oculta">
+    <div class="cabecera-seccion">
+      <button class="btn btn-volver" id="btn-salir-vf">⬅ Salir</button>
+      <h2>⚡ Verdadero o Falso</h2>
+      <div class="marcador">⭐ <span id="vf-puntos">0</span></div>
+    </div>
+
+    <div class="barra-progreso"><div id="vf-progreso"></div></div>
+
+    <div class="vf-caja">
+      <p class="vf-instruccion">Lee con atención… ¿es verdadero 🤔 o es falso 🧐?</p>
+      <div class="vf-afirmacion-caja">
+        <span id="vf-materia" class="vf-materia">📚</span>
+        <p id="vf-texto"></p>
+        <button id="btn-leer-vf" class="btn-leer btn-leer-vf" title="Escuchar">🔊</button>
+      </div>
+
+      <div class="vf-botones">
+        <button id="btn-verdadero" class="btn-hero btn-verdadero">✅ VERDADERO</button>
+        <button id="btn-falso" class="btn-hero btn-falso">❌ FALSO</button>
+      </div>
+
+      <div id="vf-feedback" class="feedback oculta">
+        <span id="vf-cara" class="feedback-cara">🎉</span>
+        <div>
+          <p id="vf-feedback-titulo" class="feedback-titulo"></p>
+          <p id="vf-feedback-texto" class="feedback-texto"></p>
+        </div>
+      </div>
+
+      <button id="btn-siguiente-vf" class="btn btn-verde btn-centrado oculta">Siguiente ➡️</button>
+    </div>
+  </section>
+
+  <!-- ============ PANTALLA RESULTADOS ============ -->
+  <section id="pantalla-resultados" class="pantalla oculta">
+    <div class="resultado-caja">
+      <div id="resultado-emoji" class="resultado-emoji">🏆</div>
+      <h2 id="resultado-titulo">¡Excelente!</h2>
+      <div id="resultado-estrellas" class="resultado-estrellas"></div>
+      <p id="resultado-marcador" class="resultado-marcador"></p>
+      <p id="resultado-mensaje" class="resultado-mensaje"></p>
+      <div class="fila-centro">
+        <button id="btn-repetir" class="btn btn-naranja">🔁 Jugar otra vez</button>
+        <button id="btn-inicio" class="btn btn-blanco">🏠 Inicio</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<noscript><p style="text-align:center;padding:20px">Esta página necesita JavaScript para funcionar. 😊</p></noscript>
+<script src="app.js"></script>
+</body>
+</html>
